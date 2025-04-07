@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { loginStart, loginSuccess, loginFailure } from '../store/slices/authSlice';
 import { authAPI } from '../services/api';
+import './Login.css';
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -54,17 +55,9 @@ const Login = () => {
 
     if (loading) {
         return (
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '100vh',
-                }}
-            >
-                loading...
-                {/* <CircularProgress /> */}
-            </Box>
+            <div className="loading-container">
+                <CircularProgress className="loading-spinner" size={40} />
+            </div>
         );
     }
 
@@ -73,8 +66,8 @@ const Login = () => {
             <Box
                 sx={{
                     marginTop: 4,
-                    marginLeft: 50,
-                    marginRight: -70,
+                    // marginLeft: 50,
+                    // marginRight: -70,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',

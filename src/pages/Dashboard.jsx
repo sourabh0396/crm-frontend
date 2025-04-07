@@ -12,6 +12,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Chip,
 } from '@mui/material';
 import {
   BarChart,
@@ -28,6 +29,7 @@ import {
   fetchDashboardFailure,
 } from '../store/slices/dashboardSlice';
 import { dashboardAPI } from '../services/api';
+import './Dashboard.css';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -54,23 +56,29 @@ const Dashboard = () => {
     return new Date(dateString).toLocaleString();
   };
 
+  const getStatusColor = (status) => {
+    switch (status.toLowerCase()) {
+      case 'connected':
+        return 'success';
+      case 'not_connected':
+        return 'error';
+      case 'pending':
+        return 'warning';
+      default:
+        return 'default';
+    }
+  };
+
   return (
-    <Box sx={{width:'100%'}} px={2}>
-      <Typography variant="h4" gutterBottom>
-        Dashboard
+    <Box className="dashboard-container">
+      <Typography variant="h4" className="dashboard-title">
+        Dashboard 
       </Typography>
 
       {/* Metrics Cards */}
-      <Grid container spacing={3} sx={{ mb: 4,width:'100%' }}>
+      <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={4}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: 140,
-            }}
-          >
+          <Paper className="metrics-card" sx={{ p: 3 }}>
             <Typography color="textSecondary" gutterBottom>
               Total Telecallers
             </Typography>
@@ -78,14 +86,7 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: 140,
-            }}
-          >
+          <Paper className="metrics-card" sx={{ p: 3 }}>
             <Typography color="textSecondary" gutterBottom>
               Total Calls Made
             </Typography>
@@ -93,14 +94,7 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: 140,
-            }}
-          >
+          <Paper className="metrics-card" sx={{ p: 3 }}>
             <Typography color="textSecondary" gutterBottom>
               Total Customers Contacted
             </Typography>
@@ -112,8 +106,8 @@ const Dashboard = () => {
       </Grid>
 
       {/* Call Trends Chart */}
-      <Paper sx={{ p: 2, mb: 4 }}>
-        <Typography variant="h6" gutterBottom>
+      <Paper className="chart-container">
+        <Typography variant="h6" className="chart-title">
           Call Trends (Last 7 Days)
         </Typography>
         <Box sx={{ height: 300 }}>
@@ -123,15 +117,15 @@ const Dashboard = () => {
               <XAxis dataKey="_id" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="count" fill="#8884d8" />
+              <Bar dataKey="count" fill="#1976d2" />
             </BarChart>
           </ResponsiveContainer>
         </Box>
       </Paper>
 
       {/* Recent Calls Table */}
-      <Paper sx={{ p: 2,width:'100%' }}>
-        <Typography variant="h6" gutterBottom>
+      <Paper className="recent-calls-table">
+        <Typography variant="h6" className="chart-title" sx={{ p: 2 }}>
           Recent Connected Calls
         </Typography>
         <TableContainer>
@@ -150,7 +144,14 @@ const Dashboard = () => {
                   <TableCell>{call.name}</TableCell>
                   <TableCell>{call.assignedTo.name}</TableCell>
                   <TableCell>{formatDate(call.lastCallDate)}</TableCell>
-                  <TableCell>{call.callResponse}</TableCell>
+                  <TableCell>
+                    <Chip
+                      label={call.callResponse}
+                      color={getStatusColor(call.callResponse)}
+                      className="status-chip"
+                      size="small"
+                    />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

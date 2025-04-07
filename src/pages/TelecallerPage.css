@@ -1,3 +1,5 @@
-.add-lead-button{
-    padding: -20px;
+.add-lead-button {
+    padding: 8px 16px;
+    min-width: 120px;
+    height: 40px;
 }
