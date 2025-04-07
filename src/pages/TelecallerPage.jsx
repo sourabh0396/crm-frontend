@@ -93,13 +93,13 @@ const TelecallerPage = () => {
     setSelectedLead(lead);
     const initialStatus = lead.status || 'pending';
     const initialCallResponse = lead.callResponse || getDefaultCallResponse(initialStatus);
-    
+
     console.log('Setting initial status data:', {
       status: initialStatus,
       callResponse: initialCallResponse,
       address: lead.address || ''
     });
-    
+
     setStatusData({
       status: initialStatus,
       callResponse: initialCallResponse,
@@ -151,7 +151,7 @@ const TelecallerPage = () => {
         default:
           defaultCallResponse = '';
       }
-      
+
       setStatusData(prev => ({
         ...prev,
         status: value,
@@ -171,12 +171,6 @@ const TelecallerPage = () => {
         return 'discussed';
       case 'not_connected':
         return 'busy';
-      case 'not_interested':
-        return 'not_interested';
-      case 'callback':
-        return 'callback';
-      case 'pending':
-        return 'discussed';
       default:
         return '';
     }
@@ -202,7 +196,7 @@ const TelecallerPage = () => {
       toast.error('Please select both status and call response');
       return;
     }
-    
+
     dispatch(updateLeadStart());
     try {
       console.log('Submitting status update:', {
@@ -243,7 +237,7 @@ const TelecallerPage = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
         <h1>Leads Management</h1>
         <Button
-        className='add-lead-button'
+          className='add-lead-button'
           variant="contained"
           startIcon={<AddIcon />}
           onClick={handleOpenDialog}
@@ -279,8 +273,8 @@ const TelecallerPage = () => {
                       lead.status === 'connected'
                         ? 'success'
                         : lead.status === 'not_interested'
-                        ? 'error'
-                        : 'warning'
+                          ? 'error'
+                          : 'warning'
                     }
                     size="small"
                   />
@@ -377,13 +371,10 @@ const TelecallerPage = () => {
               margin="normal"
               required
             >
-              <MenuItem value="pending">Pending</MenuItem>
               <MenuItem value="connected">Connected</MenuItem>
               <MenuItem value="not_connected">Not Connected</MenuItem>
-              <MenuItem value="not_interested">Not Interested</MenuItem>
-              <MenuItem value="callback">Callback</MenuItem>
             </TextField>
-            
+
             <TextField
               fullWidth
               select
@@ -405,18 +396,9 @@ const TelecallerPage = () => {
                 <MenuItem key="rnr" value="rnr">RNR (Ring No Response)</MenuItem>,
                 <MenuItem key="switched_off" value="switched_off">Switched Off</MenuItem>
               ]}
-              {statusData.status === 'pending' && [
-                <MenuItem key="discussed" value="discussed">Discussed</MenuItem>,
-                <MenuItem key="callback" value="callback">Callback</MenuItem>
-              ]}
-              {statusData.status === 'not_interested' && 
-                <MenuItem value="not_interested">Not Interested</MenuItem>
-              }
-              {statusData.status === 'callback' && 
-                <MenuItem value="callback">Callback</MenuItem>
-              }
+
             </TextField>
-            
+
             <TextField
               fullWidth
               label="Address"
@@ -431,8 +413,8 @@ const TelecallerPage = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseStatusDialog}>Cancel</Button>
-          <Button 
-            onClick={handleStatusSubmit} 
+          <Button
+            onClick={handleStatusSubmit}
             variant="contained"
             disabled={!statusData.status || !statusData.callResponse}
           >
