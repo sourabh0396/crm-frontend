@@ -63,7 +63,7 @@ const Register = () => {
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 4,
           marginLeft: 50,
           marginRight: -70,
           display: 'flex',

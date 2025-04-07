@@ -55,13 +55,13 @@ const Dashboard = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{width:'100%'}} px={2}>
       <Typography variant="h4" gutterBottom>
         Dashboard
       </Typography>
 
       {/* Metrics Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={3} sx={{ mb: 4,width:'100%' }}>
         <Grid item xs={12} sm={4}>
           <Paper
             sx={{
@@ -130,7 +130,7 @@ const Dashboard = () => {
       </Paper>
 
       {/* Recent Calls Table */}
-      <Paper sx={{ p: 2 }}>
+      <Paper sx={{ p: 2,width:'100%' }}>
         <Typography variant="h6" gutterBottom>
           Recent Connected Calls
         </Typography>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import './TelecallerPage.css';
 import {
   Box,
   Button,
@@ -242,6 +243,7 @@ const TelecallerPage = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
         <h1>Leads Management</h1>
         <Button
+        className='add-lead-button'
           variant="contained"
           startIcon={<AddIcon />}
           onClick={handleOpenDialog}

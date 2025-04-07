@@ -14,6 +14,7 @@ const PrivateRoute = ({ children, roles = [] }) => {
           justifyContent: 'center',
           alignItems: 'center',
           height: '100vh',
+          width: '100vw',
         }}
       >
         <CircularProgress />
